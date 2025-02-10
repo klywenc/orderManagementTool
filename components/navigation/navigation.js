@@ -1,9 +1,11 @@
-import styles from "./page.module.css";
+import Link from 'next/link';
 
-export default function Home() {
+const Navigation = () => {
   return (
-    <div className={styles.page}>
+    <div>
 
     </div>
   );
-}
+};
+
+export default Navigation;
