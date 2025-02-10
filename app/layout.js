@@ -1,24 +1,18 @@
-'use client'
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation/navigation";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const metadata = {
+    title: 'Megumi Ramen',
+    description: 'Experience the rich flavors of authentic ramen and Asian cuisine, crafted with passion and tradition.',
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        
+      <body>
         <Navigation></Navigation>
+        {children}
+        {/*<footer></footer>*/}
       </body>
     </html>
   );
