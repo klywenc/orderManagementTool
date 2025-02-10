@@ -3,12 +3,22 @@
 * {
   box-sizing: border-box;
 }
+<<<<<<< HEAD
 
 html {
   font-family: 'Quicksand', sans-serif;
+=======
+html {
+  font-family: 'Figtree', sans-serif;
+  
+>>>>>>> feature/navigation
 }
 
 body {
   margin: 0;
   background: radial-gradient(#ffffff, #f0f0f0);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> feature/navigation
