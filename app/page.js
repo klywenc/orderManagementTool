@@ -74,22 +74,16 @@ export default function HomePage() {
                   </p>
               </ContentSection>
 
-              <section className="text-center mb-10">
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                      Godziny otwarcia
-                  </h2>
+              <ContentSection title="Godziny otwarcia">
                   <ul className="text-lg text-gray-600">
                       <li>Poniedziałek - Piątek: <strong>12:00 - 22:00</strong></li>
                       <li>Sobota - Niedziela: <strong>13:00 - 23:00</strong></li>
                   </ul>
-              </section>
+              </ContentSection>
 
-              <section className="text-center mb-10">
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                      Znajdź nas
-                  </h2>
+              <ContentSection title="Znajdź nas">
                   <p className="text-lg text-gray-600">
-                      📍 Ul. Smakoszy 12, 00-123 Warszawa
+                      📍 Ul. Główna 24, 82-410 Stary Targ
                   </p>
                   <p className="text-lg text-gray-600 mt-2">
                       📞 +48 123 456 789
@@ -97,7 +91,7 @@ export default function HomePage() {
                   <p className="text-lg text-gray-600 mt-2">
                       📧 kontakt@megumiramen.pl
                   </p>
-              </section>
+              </ContentSection>
 
               <MainButtonPanel/>
           </div>
