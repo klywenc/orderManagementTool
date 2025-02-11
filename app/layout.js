@@ -1,5 +1,7 @@
 import "./globals.css";
 import Navigation from "@/components/navigation/navigation";
+import AuthProvider from "@/components/providers/AuthProvider";
+
 
 export const metadata = {
     title: 'Megumi Ramen',
@@ -10,6 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <AuthProvider>{children}</AuthProvider>
         <Navigation></Navigation>
         {children}
         {/*<footer></footer>*/}
