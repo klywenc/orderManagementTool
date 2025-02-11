@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth'
-import CredentialsProvider from 'next-auth/providers/credentials'
-import prisma from '@/lib/prisma'
-import bcrypt from 'bcryptjs'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import prisma from '@/lib/prisma';
+import bcrypt from 'bcryptjs';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 export const authOptions = {
     providers: [
@@ -13,18 +13,18 @@ export const authOptions = {
                 password: { label: 'Password', type: 'password' },
             },
             async authorize(credentials) {
-                if (!credentials.email || !credentials.password) return null
+                if (!credentials.email || !credentials.password) return null;
 
                 const user = await prisma.user.findUnique({
                     where: { email: credentials.email },
-                })
+                });
 
-                if (!user) return null
+                if (!user) return null;
 
-                const isValid = await bcrypt.compare(credentials.password, user.password)
-                if (!isValid) return null
+                const isValid = await bcrypt.compare(credentials.password, user.password);
+                if (!isValid) return null;
 
-                return { id: user.id, email: user.email, role: user.role }
+                return { id: user.id, email: user.email, role: user.role };
             },
         }),
     ],
@@ -32,7 +32,7 @@ export const authOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     session: {
         strategy: 'jwt',
-        maxAge: 30 * 24 * 60 * 60, // 30 dni
+        maxAge: 30 * 24 * 60 * 60,
     },
     pages: {
         signIn: '/login',
@@ -40,18 +40,18 @@ export const authOptions = {
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token.id = user.id
-                token.role = user.role
+                token.id = user.id;
+                token.role = user.role;
             }
-            return token
+            return token;
         },
         async session({ session, token }) {
-            session.user.id = token.id
-            session.user.role = token.role
-            return session
+            session.user.id = token.id;
+            session.user.role = token.role;
+            return session;
         },
     },
-}
+};
 
-const handler = NextAuth(authOptions)
-export { handler as GET, handler as POST }
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
