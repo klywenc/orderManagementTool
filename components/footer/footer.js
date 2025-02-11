@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 
-
 const Footer = () => {
     return (
         <footer className="bg-white border-gray-200 dark:bg-gray-200 text-gray-900 text-center p-6 border-t mt-auto">
