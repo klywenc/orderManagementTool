@@ -1,95 +1,79 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+import { useCart } from '@/app/contexts/CartContext';
+import Link from 'next/link';
 
-export default function Home() {
+const CartPage = () => {
+  const { cartItems, removeItemFromCart, updateItemQuantity, clearCart } = useCart();
+
+  const handleQuantityChange = (itemId, event) => {
+    const newQuantity = parseInt(event.target.value, 10);
+    if (!isNaN(newQuantity) && newQuantity >= 0) { 
+      if (newQuantity === 0) {
+        removeItemFromCart(itemId);
+      } else {
+        updateItemQuantity(itemId, newQuantity);
+      }
+    }
+  };
+
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6">Twój Koszyk</h1>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      {cartItems.length === 0 ? (
+        <p>Twój koszyk jest pusty.</p>
+      ) : (
+        <div>
+          {cartItems.map((item) => (
+            <div key={item.id} className="bg-white p-4 rounded-lg shadow-md mb-4 flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-bold text-orange-600">{item.name}</h2>
+                <p className="text-gray-600">{item.description}</p>
+                <p className="text-lg font-semibold">Cena: {item.price.toFixed(2)} zł</p>
+                <div className="flex items-center mt-2">
+                  <label htmlFor={`quantity-${item.id}`} className="mr-2">Ilość:</label>
+                  <input
+                    type="number"
+                    id={`quantity-${item.id}`}
+                    min="0" // Zezwól na 0
+                    value={item.quantity}
+                    onChange={(e) => handleQuantityChange(item.id, e)}
+                    className="w-16 border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  />
+                </div>
+              </div>
+              <button
+                onClick={() => removeItemFromCart(item.id)}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200"
+              >
+                Usuń
+              </button>
+            </div>
+          ))}
+
+            <div className="mt-6">
+              <p className="text-xl font-bold">Suma: {totalPrice.toFixed(2)} zł</p>
+              <button
+                onClick={clearCart}
+                className="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded transition-colors duration-200 mr-2 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              >
+                Wyczyść koszyk
+              </button>
+              <button
+                onClick={() => {
+                  router.push('/checkout'); 
+                }}
+                className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              >
+                Przejdź do kasy
+              </button>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      )}
     </div>
   );
-}
+};
+
+export default CartPage;
