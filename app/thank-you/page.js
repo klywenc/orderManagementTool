@@ -23,6 +23,26 @@ const ThankYouPage = () => {
         fetchOrder();
     }, []);
 
+    // Funkcja do obsługi pobierania faktury
+    const handleDownloadInvoice = async () => {
+        try {
+            const res = await fetch(`/api/orders/${order.id}/e-invoice`); // Ścieżka do generowania faktury
+            if (!res.ok) throw new Error('Błąd podczas generowania faktury');
+
+            // Pobieranie pliku PDF
+            const blob = await res.blob(); // Pobierz plik jako blob
+            const url = window.URL.createObjectURL(blob); // Utwórz URL dla pliku
+            const link = document.createElement('a'); // Utwórz link do pobrania
+            link.href = url;
+            link.download = `faktura_${order.id}.pdf`; // Ustal nazwę pliku
+            document.body.appendChild(link);
+            link.click(); // Kliknij, aby pobrać
+            link.remove(); // Usuń link po kliknięciu
+        } catch (error) {
+            console.error('Błąd podczas pobierania faktury:', error);
+        }
+    };
+
     if (loading) return <p className="text-center text-lg">Ładowanie...</p>;
     if (!order) return <p className="text-center text-lg text-red-500">Nie znaleziono zamówienia.</p>;
 
@@ -61,9 +81,18 @@ const ThankYouPage = () => {
             </div>
 
             <div className="text-center mt-6">
-                <a href="/" className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-600 transition">
-                    Powrót do strony głównej
-                </a>
+                {/* Przycisk do pobrania faktury */}
+                <button
+                    onClick={handleDownloadInvoice}
+                    className="bg-orange-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-orange-600 transition"
+                >
+                    Pobierz fakturę
+                </button>
+                <div className="mt-4">
+                    <a href="/" className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-600 transition">
+                        Powrót do strony głównej
+                    </a>
+                </div>
             </div>
         </div>
     );
