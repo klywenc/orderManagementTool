@@ -17,9 +17,10 @@ export default function LoginPage() {
       password,
     });
     if (!result.error) {
-      router.push('/'); 
+      router.refresh(); 
+      router.push('/');
     } else {
-      setError('Nieprawidłowy email lub hasło.'); 
+      setError('Nieprawidłowy email lub hasło.');
     }
   };
 
@@ -42,7 +43,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Wprowadź email"
-              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500" // Zmieniony kolor focus
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"
               required
             />
           </div>
@@ -57,13 +58,13 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Wprowadź hasło"
-              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500" // Zmieniony kolor focus
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400" // Zmieniony kolor i dodany focus
+            className="w-full py-2 px-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
           >
             Zaloguj
           </button>

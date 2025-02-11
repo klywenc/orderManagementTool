@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const bcrypt = require('bcryptjs'); 
 
 const prisma = new PrismaClient();
 
@@ -16,12 +17,34 @@ const menuItems = [
 
 async function main() {
   await prisma.menuItem.deleteMany({});
+  await prisma.user.deleteMany({});
 
   for (const item of menuItems) {
     await prisma.menuItem.create({
       data: item,
     });
   }
+
+  const hashedPasswordAdmin = await bcrypt.hash('admin', 10); 
+  const hashedPasswordEmployee = await bcrypt.hash('employee', 10); 
+
+  await prisma.user.create({
+    data: {
+      email: 'admin@admin.com', 
+      password: hashedPasswordAdmin,
+      role: 'admin',
+    },
+  });
+
+  await prisma.user.create({
+    data: {
+      email: 'employee@employee.com', 
+      password: hashedPasswordEmployee,
+      role: 'employee',
+    },
+  });
+
+
   console.log('Seeding finished.');
 }
 
