@@ -21,17 +21,17 @@ const MenuItem = ({ item }) => {
 
     toast.success(`Dodano ${item.name} x ${quantity} do koszyka!`, {
       position: "top-right",
-      autoClose: 3000,       
-      hideProgressBar: false, 
-      closeOnClick: true,    
-      pauseOnHover: true,    
-      draggable: true,      
-      progress: undefined,   
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
     });
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-lg shadow-md transition-transform duration-200 ease-in-out hover:scale-105"> {/* Dodano klasy Tailwind */}
       <h2 className="text-2xl font-bold text-orange-600 mb-2">{item.name}</h2>
       <p className="text-gray-600 mb-4">{item.description}</p>
       <p className="text-lg font-semibold text-gray-800 mb-4">Cena: {item.price.toFixed(2)} zł</p>
