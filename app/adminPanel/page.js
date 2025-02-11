@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const AdminPanelPage = () => {
   const { data: session } = useSession();
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingUserId, setEditingUserId] = useState(null);
   const [editedRole, setEditedRole] = useState('');
@@ -35,8 +34,6 @@ const AdminPanelPage = () => {
       } catch (error) {
         setError(error);
         toast.error(error.message);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -119,14 +116,6 @@ const AdminPanelPage = () => {
       });
     }
   };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
-      </div>
-    );
-  }
 
   if (error) {
     return (
