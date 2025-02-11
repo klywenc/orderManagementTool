@@ -6,7 +6,7 @@ const Navigation = () => {
       <div className='max-w-screen-3xl flex flex-wrap items-center justify-between mx-auto p-1'>
         <Link
           href="/"
-          className="px-2 py-4 text-4xl font-extrabold text-orange-600 tracking-wide relative"
+          className="px-2 py-4 text-4xl font-extrabold text-orange-600"
         >
           Megumi Ramen
         </Link>
@@ -21,7 +21,7 @@ const Navigation = () => {
           </li>
           <li>
             <Link
-              href="/employee-panel"
+              href="/employeePanel"
               className='block py-2 px-3 text-gray-600 rounded-sm md:hover:bg-transparent md:border-0 md:hover:text-orange-600 md:p-0 dark:text-gray-600 dark:hover:text-orange-600 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full'
             >
               Panel Pracownika
@@ -29,7 +29,15 @@ const Navigation = () => {
           </li>
           <li>
             <Link
-              href="/your-order"
+              href="/adminPanel"
+              className='block py-2 px-3 text-gray-600 rounded-sm md:hover:bg-transparent md:border-0 md:hover:text-orange-600 md:p-0 dark:text-gray-600 dark:hover:text-orange-600 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full'
+            >
+              Panel Administratora
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/orderStatus"
               className='block py-2 px-3 text-gray-600 rounded-sm md:hover:bg-transparent md:border-0 md:hover:text-orange-600 md:p-0 dark:text-gray-600 dark:hover:text-orange-600 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full'
             >
               Twoje zamówienie
