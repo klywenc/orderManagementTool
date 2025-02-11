@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import MainButtonPanel from "@/components/mainPageButtonPanel/buttonPanel";
 
 export default function HomePage() {
   return (
@@ -22,17 +23,7 @@ export default function HomePage() {
                   />
               </section>
 
-              <section className="relative w-full max-w-3xl mx-auto mb-10">
-                  <Link href="/menu"
-                        className="inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl transition-colors duration-200 mb-4">
-                      Zobacz Menu
-                  </Link>
-                  <br/>
-                  <Link href="/login"
-                        className="inline-block bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl transition-colors duration-200">
-                      Zaloguj się
-                  </Link>
-              </section>
+              <MainButtonPanel />
 
               <section className="text-center mb-10">
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
@@ -90,17 +81,7 @@ export default function HomePage() {
                   </p>
               </section>
 
-              <section className=" mb-10">
-                  <Link href="/menu"
-                        className="inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl transition-colors duration-200 mb-4">
-                      Zobacz Menu
-                  </Link>
-                  <br/>
-                  <Link href="/login"
-                        className="inline-block bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl transition-colors duration-200">
-                      Zaloguj się
-                  </Link>
-              </section>
+              <MainButtonPanel />
           </div>
       </main>
   );
