@@ -47,16 +47,39 @@ export const CartProvider = ({ children }) => {
       setCartItems(updatedCart);
     }
   };
-    const clearCart = () => {
-        setCartItems([]);
-    };
+
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem('cart');
+  };
+
+  const finalizeOrder = async () => {
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cartItems }),
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        clearCart();
+      } else {
+        console.error('Błąd zapisu zamówienia:', responseData.error || response.statusText);
+      }
+    } catch (error) {
+      console.error('Błąd serwera:', error);
+    }
+  };
 
   const value = {
     cartItems,
     addItemToCart,
     removeItemFromCart,
     updateItemQuantity,
-      clearCart
+    clearCart,
+    finalizeOrder,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
