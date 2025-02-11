@@ -5,15 +5,17 @@ import Footer from "@/components/footer/footer";
 
 export const metadata = {
     title: 'Megumi Ramen',
-    description: 'Experience the rich flavors of authentic ramen and Asian cuisine, crafted with passion and tradition.',
+    description: 'Poznaj bogate smaki autentycznego ramenu i kuchni azjatyckiej, tworzonej z pasją i tradycją.',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        <Navigation></Navigation>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+            <Navigation />
+            {children}
+        </AuthProvider>
         <Footer />
       </body>
     </html>
