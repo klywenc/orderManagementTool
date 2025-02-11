@@ -3,15 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
-}
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       Int
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
@@ -19,7 +12,6 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
-  sessions  Session[]
 }
 
 model MenuItem {  
