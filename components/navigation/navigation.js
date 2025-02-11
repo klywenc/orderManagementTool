@@ -25,7 +25,6 @@ const Navigation = () => {
               </Link>
             </li>
 
-            {/* Panel Pracownika - widoczny tylko dla employee i admin */}
             {(session?.user.role === 'employee' || session?.user.role === 'admin') && (
                 <li>
                   <Link
@@ -37,7 +36,6 @@ const Navigation = () => {
                 </li>
             )}
 
-            {/* Panel Administratora - widoczny tylko dla admin */}
             {session?.user.role === 'admin' && (
                 <li>
                   <Link
@@ -49,7 +47,6 @@ const Navigation = () => {
                 </li>
             )}
 
-            {/* Twoje zamówienie - widoczne dla wszystkich zalogowanych użytkowników */}
             {session && (
                 <li>
                   <Link
@@ -61,7 +58,6 @@ const Navigation = () => {
                 </li>
             )}
 
-            {/* Koszyk - widoczny dla wszystkich */}
             <li>
               <Link
                   href="/cart"
@@ -71,7 +67,6 @@ const Navigation = () => {
               </Link>
             </li>
 
-            {/* Zaloguj/Wyloguj - warunkowe wyświetlanie */}
             {!session ? (
                 <li>
                   <Link
