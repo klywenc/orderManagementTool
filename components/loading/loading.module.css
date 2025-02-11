@@ -1,0 +1,38 @@
+/* components/loading/Loading.module.css */
+.loadingContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Lekko przezroczyste tło */
+    z-index: 1000; /* Upewnij się, że animacja jest na wierzchu */
+}
+
+.ramenImage {
+    width: 100px; /* Dostosuj rozmiar obrazka */
+    height: auto;
+    animation: scaleAnimation 2s ease-in-out infinite; /* Animacja */
+    transform-origin: center; /* Punkt odniesienia dla animacji (środek obrazka) */
+}
+
+@keyframes scaleAnimation {
+    0% {
+        transform: scale(1); /* Początkowa skala (normalny rozmiar) */
+    }
+    25% {
+        transform: scale(1.1); /* Powiększenie o 10% */
+    }
+    50% {
+        transform: scale(1.2); /* Powiększenie o 20% */
+    }
+    75% {
+        transform: scale(1.1); /* Zmniejszenie o 10% */
+    }
+    100% {
+        transform: scale(1); /* Powrót do normalnego rozmiaru */
+    }
+}
