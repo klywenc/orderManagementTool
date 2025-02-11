@@ -54,7 +54,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="pb-16 min-h-screen bg-gray-50 flex items-center">
+    <div className="pb-16 min-h-screen flex items-center">
       <div className="container mx-auto px-4">
         <motion.div 
           className="max-w-md mx-auto"
