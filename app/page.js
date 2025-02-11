@@ -15,14 +15,14 @@ export default function HomePage() {
 
           <div className="relative w-full max-w-3xl mx-auto mb-10">
             <Image
-              src="/images/ramen.jpg" // Poprawiona ścieżka
+              src="/images/ramen.jpg" 
               alt="Pyszny ramen"
-              width={1200}  // Dostosuj do rozmiaru obrazka
-              height={600} // Dostosuj do rozmiaru obrazka
+              width={1200}  
+              height={600} 
               className="rounded-lg shadow-xl object-cover"
-              priority // Dodaj, jeśli obrazek jest ważny dla LCP
+              priority 
             />
-            <div className="absolute inset-0 bg-black opacity-20 rounded-lg"></div> {/* Ciemne tło dla lepszej czytelności */}
+            <div className="absolute inset-0 bg-black opacity-20 rounded-lg"></div> 
           </div>
           
 

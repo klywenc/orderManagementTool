@@ -1,8 +1,12 @@
 'use client'
 import { useState } from 'react';
+import { useCart } from '@/app/contexts/CartContext';
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 const MenuItem = ({ item }) => {
-  const [quantity, setQuantity] = useState(1); 
+  const [quantity, setQuantity] = useState(1);
+  const { addItemToCart } = useCart();
 
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value, 10);
@@ -11,7 +15,20 @@ const MenuItem = ({ item }) => {
     }
   };
 
+  const handleAddToCart = () => {
+    addItemToCart(item, quantity);
+    setQuantity(1);
 
+    toast.success(`Dodano ${item.name} x ${quantity} do koszyka!`, {
+      position: "top-right",
+      autoClose: 3000,       
+      hideProgressBar: false, 
+      closeOnClick: true,    
+      pauseOnHover: true,    
+      draggable: true,      
+      progress: undefined,   
+    });
+  };
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
@@ -32,7 +49,7 @@ const MenuItem = ({ item }) => {
           />
         </div>
         <button
-
+          onClick={handleAddToCart}
           className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200"
         >
           Dodaj do koszyka
