@@ -29,6 +29,8 @@ model User {
   email     String   @unique
   password  String
   orders    Order[]
+  createdAt DateTime @default(now())
+  role      String   @default("user")
 }
 
 model MenuItem {
