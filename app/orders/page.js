@@ -115,10 +115,10 @@ const OrdersPage = () => {
     if (orders.length === 0) return <p className="text-center text-lg text-gray-600">Brak zamówień.</p>;
 
     return (
-        <div className="bg-gray-50 min-h-screen p-8 font-sans">
+        <div className="min-h-screen p-8 font-sans">
             <div className="container mx-auto">
-                <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div className="px-6 py-5 border-b border-gray-200 bg-gray-50">
+                <div className="bg-gray-50 rounded-xl shadow-md overflow-hidden">
+                    <div className="px-6 py-5 border-b border-gray-200 bg-gray-50 shadow-md">
                         <h1 className="text-2xl font-semibold text-gray-800">
                             Twoje <span className="text-black">Zamówienia</span>
                         </h1>
@@ -129,7 +129,9 @@ const OrdersPage = () => {
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-100">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">ID Zamówienia</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">ID
+                                        Zamówienia
+                                    </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Status</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Suma</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider text-right">Akcje</th>
@@ -141,7 +143,8 @@ const OrdersPage = () => {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium">{order.id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm">
                                             {/* Dynamic badge styles based on status */}
-                                            <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold ${statusColors[order.status]?.bgColor || 'bg-gray-100'} ${statusColors[order.status]?.textColor || 'text-gray-800'} border ${statusColors[order.status]?.borderColor || 'border-gray-200'}`}>
+                                            <span
+                                                className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold ${statusColors[order.status]?.bgColor || 'bg-gray-100'} ${statusColors[order.status]?.textColor || 'text-gray-800'} border ${statusColors[order.status]?.borderColor || 'border-gray-200'}`}>
                                                 {statusToPolish[order.status] || order.status}
                                             </span>
                                         </td>

@@ -100,7 +100,7 @@ const EmployeePanelPage = () => {
   }
 
   return (
-      <div className="bg-gray-100 min-h-screen p-8 font-sans">
+      <div className="min-h-screen p-8 font-sans">
         <div className="container mx-auto">
           <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Panel Pracownika</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
