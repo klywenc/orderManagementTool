@@ -1,5 +1,5 @@
-
 'use client';
+
 import { useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Loading from '@/components/loading/Loading';
