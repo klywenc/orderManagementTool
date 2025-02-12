@@ -1,7 +1,8 @@
 'use client'
+
 import { useState } from 'react';
 import { useCart } from '@/app/contexts/CartContext';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MenuItem = ({ item }) => {

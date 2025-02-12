@@ -12,7 +12,7 @@ const ImageSlider = ({ imagePaths }) => {
         clearInterval(intervalRef.current);
         intervalRef.current = setInterval(() => {
             goToNext();
-        }, 2000);
+        }, 4000);
     };
 
     const goToNext = () => {
