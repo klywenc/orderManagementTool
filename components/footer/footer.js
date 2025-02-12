@@ -22,21 +22,18 @@ const Footer = () => {
                     <h2 className="text-lg font-semibold">Obserwuj Nas</h2>
                     <div className="flex flex-col space-y-3 mt-2">
                         <Link href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                            <div
-                                className="text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-2">
+                            <div className="text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-2">
                                 <FaFacebook size={24}/>
                                 Facebook
                             </div>
                         </Link>
                         <Link href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                            <div
-                                className="text-pink-600 hover:text-pink-800 transition-colors flex items-center gap-2">
+                            <div className="text-pink-600 hover:text-pink-800 transition-colors flex items-center gap-2">
                                 <FaInstagram size={24}/>
                                 Instagram
                             </div>
                         </Link>
                     </div>
-
                 </div>
             </div>
         </footer>
