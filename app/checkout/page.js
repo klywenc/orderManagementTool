@@ -27,7 +27,7 @@ const CheckoutPage = () => {
     };
 
     return (
-        <main className="flex items-start justify-center bg-gray-100 pt-12 pb-10">
+        <main className="flex items-start justify-center pt-12 pb-10">
             <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-4">
                 <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
                     <span className="text-orange-600">Podsumowanie</span> zamówienia
@@ -67,7 +67,7 @@ const CheckoutPage = () => {
                     <button
                         onClick={handleOrderSubmit}
                         disabled={loading}
-                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md mt-4 w-full md:w-auto transition-colors duration-200"
+                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md mt-4 w-full md:w-auto transition-colors duration-200 cursor-pointer"
                     >
                         {loading ? 'Przetwarzanie...' : 'Złóż zamówienie'}
                     </button>
