@@ -1,4 +1,4 @@
-import styles from './Loading.module.css';
+import styles from './loading.module.css';
 
 export default function Loading() {
     return (
@@ -6,4 +6,4 @@ export default function Loading() {
             <img src="/ramenload.png" alt="Loading" className={styles.ramenImage} />
         </div>
     );
-}
+}   
