@@ -16,7 +16,8 @@ const EmployeePanelPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch('/api/orders?type=all', {
+        // Zmiana z type=all na type=fall
+        const response = await fetch('/api/orders?type=fall', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${session?.accessToken}`,

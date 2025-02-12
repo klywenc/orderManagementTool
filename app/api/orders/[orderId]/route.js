@@ -3,28 +3,34 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from '@/lib/prisma';
 
 // GET /api/orders/[orderId] – Pobierz konkretne zamówienie
-export async function GET(req, { params }) {
+export async function GET(req) {
     const session = await getServerSession(authOptions);
 
+    // Sprawdź, czy użytkownik jest zalogowany
     if (!session || !session.user || !session.user.id) {
         return new Response(JSON.stringify({ error: "Nie jesteś zalogowany" }), { status: 401 });
     }
 
-    const { orderId } = await params; // Await params here
-
     try {
-        const order = await prisma.order.findUnique({
-            where: { id: parseInt(orderId) },
+        // Sprawdź rolę użytkownika
+        const user = await prisma.user.findUnique({
+            where: { id: session.user.id },
+            select: { role: true }
+        });
+
+        // Jeśli użytkownik nie jest ani adminem, ani pracownikiem, zwróć błąd
+        if (user.role !== 'admin' && user.role !== 'employee') {
+            return new Response(JSON.stringify({ error: "Nie masz uprawnień do przeglądania zamówień" }), { status: 403 });
+        }
+
+        // Pobierz wszystkie zamówienia (bez ograniczeń do użytkownika)
+        const orders = await prisma.order.findMany({
             include: { items: true }
         });
 
-        if (!order) {
-            return new Response(JSON.stringify({ error: "Zamówienie nie znalezione" }), { status: 404 });
-        }
-
-        return new Response(JSON.stringify(order), { status: 200 });
+        return new Response(JSON.stringify(orders), { status: 200 });
     } catch (error) {
-        console.error("Błąd pobierania zamówienia:", error);
+        console.error("Błąd pobierania zamówień:", error);
         return new Response(JSON.stringify({ error: "Błąd serwera" }), { status: 500 });
     }
 }
