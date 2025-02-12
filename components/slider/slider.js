@@ -1,45 +1,56 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const ImageSlider = ({ imagePaths }) => {
+    const extendedImages = [...imagePaths, imagePaths[0]];
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(true);
+    const intervalRef = useRef(null);
 
-    const goToPrevious = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === 0 ? imagePaths.length - 1 : prevIndex - 1));
+    const startInterval = () => {
+        clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
+            goToNext();
+        }, 4000);
     };
 
     const goToNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === imagePaths.length - 1 ? 0 : prevIndex + 1));
+        setCurrentIndex((prevIndex) => prevIndex + 1);
+        startInterval();
     };
 
+    useEffect(() => {
+        startInterval();
+        return () => clearInterval(intervalRef.current);
+    }, []);
+
+    useEffect(() => {
+        if (currentIndex === imagePaths.length) {
+            setTimeout(() => {
+                setIsTransitioning(false);
+                setCurrentIndex(0);
+                setTimeout(() => setIsTransitioning(true), 50);
+            }, 500);
+        }
+    }, [currentIndex]);
+
     return (
-        <div className="flex mx-auto w-full max-w-3xl h-96">
-            <div className="flex items-center justify-between px-4">
-                <button onClick={goToPrevious}
-                        className="inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold py-8 px-3 rounded-full text-lg md:text-xl transition-colors duration-200 mb-4 transform"
-                >
-                    ‹
-                </button>
-                <div className="w-full h-full overflow-hidden">
-                    <div className="flex transition-transform duration-500"
-                         style={{transform: `translateX(-${currentIndex * 100}%)`}}>
-                        {imagePaths.map((path, index) => (
-                            <div key={index} className="w-full h-full flex-shrink-0">
-                                <img
-                                    src={path}
-                                    alt={`Slide ${index + 1}`}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                        ))}
+        <div className="flex mx-auto w-full max-w-3xl h-96 overflow-hidden relative">
+            <div
+                className={`w-full h-full flex ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                onClick={goToNext}
+            >
+                {extendedImages.map((path, index) => (
+                    <div key={index} className="w-full h-full flex-shrink-0">
+                        <img
+                            src={path}
+                            alt={`Slide ${index % imagePaths.length + 1}`}
+                            className="w-full h-full object-cover cursor-pointer"
+                        />
                     </div>
-                </div>
-                <button onClick={goToNext}
-                        className="inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold py-8 px-3 rounded-full text-lg md:text-xl transition-colors duration-200 mb-4 transform"
-                >
-                    ›
-                </button>
+                ))}
             </div>
         </div>
     );

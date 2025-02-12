@@ -1,4 +1,3 @@
-/* components/loading/Loading.module.css */
 .loadingContainer {
     position: fixed;
     top: 0;
@@ -8,19 +7,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0); /* Startowa przezroczystość */
-    animation: fadeInBackground 0.3s ease-in-out forwards; /* Szybsza animacja tła */
-    z-index: 1000; /* Upewnij się, że animacja jest na wierzchu */
+    background-color: rgba(255, 255, 255, 0);
+    animation: fadeInBackground 0.3s ease-in-out forwards;
+    z-index: 1000;
 }
 
 .ramenImage {
-    width: 100px; /* Dostosuj rozmiar obrazka */
+    width: 100px;
     height: auto;
-    animation: scaleAnimation 1.2s ease-in-out infinite, fadeInImage 0.3s ease-in-out; /* Szybsze animacje */
-    transform-origin: center; /* Punkt odniesienia dla animacji (środek obrazka) */
+    animation: scaleAnimation 1.2s ease-in-out infinite, fadeInImage 0.3s ease-in-out;
+    transform-origin: center;
 }
 
-/* Szybsza animacja powiększania */
 @keyframes scaleAnimation {
     0% {
         transform: scale(1);
@@ -39,7 +37,6 @@
     }
 }
 
-/* Szybsza animacja tła */
 @keyframes fadeInBackground {
     0% {
         background-color: rgba(255, 255, 255, 0);
@@ -49,7 +46,6 @@
     }
 }
 
-/* Szybsza animacja pojawienia się obrazka */
 @keyframes fadeInImage {
     0% {
         opacity: 0;

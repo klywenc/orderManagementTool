@@ -14,9 +14,7 @@ export default function HomePage() {
               </ContentSection>
 
               <MainSlider />
-
               <MainButtonPanel />
-
               <MainReviews />
 
               <ContentSection title="Nasza historia">
