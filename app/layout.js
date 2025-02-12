@@ -5,7 +5,7 @@ import Footer from "@/components/footer/footer";
 import { CartProvider } from "@/app/contexts/CartContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ClientLayout from '@/components/ClientLayout'; // Dodaj ten import
+import ClientLayout from '@/components/ClientLayout';
 
 export const metadata = {
     title: 'Megumi Ramen',
@@ -15,18 +15,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-        <body className="min-h-screen flex flex-col">
-        <AuthProvider>
-            <CartProvider>
-                <Navigation />
-                <ToastContainer />
-                <ClientLayout> {/* Opakuj children w ClientLayout */}
-                    {children}
-                </ClientLayout>
-            </CartProvider>
-        </AuthProvider>
-        <Footer />
-        </body>
+            <body className="min-h-screen flex flex-col">
+                <AuthProvider>
+                    <CartProvider>
+                        <Navigation />
+                        <ToastContainer />
+                        <ClientLayout>
+                            {children}
+                        </ClientLayout>
+                    </CartProvider>
+                </AuthProvider>
+                <Footer />
+            </body>
         </html>
     );
 }
