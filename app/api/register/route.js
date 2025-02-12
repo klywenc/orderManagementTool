@@ -11,6 +11,6 @@ export async function POST(request) {
         })
         return Response.json({ id: user.id, email: user.email }, { status: 201 })
     } catch (error) {
-        return Response.json({ error: 'User already exists' }, { status: 400 })
+        return Response.json({ error: 'Użytkownik istnieje' }, { status: 400 })
     }
 }

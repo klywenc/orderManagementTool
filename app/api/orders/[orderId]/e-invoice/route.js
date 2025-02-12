@@ -5,30 +5,38 @@ import fs from 'fs';
 import path from 'path';
 import prisma from '@/lib/prisma';
 
+/**
+ * Handles GET requests to generate a proforma invoice PDF for a specific order.
+ *
+ * @param {Request} req - The incoming HTTP request.
+ * @param {Object} context - Contains route parameters, including the order ID.
+ * @returns {NextResponse} - Returns a PDF file as a downloadable response or an error message.
+ */
 export async function GET(req, context) {
     const { params } = context;
-    const { orderId } = await params;
+    const { orderId } = params;
 
     try {
-        console.log(`Pobieranie zamówienia o ID: ${orderId}`);
+        console.log(`Fetching order with ID: ${orderId}`);
 
+        // Retrieve the order from the database, including associated items
         const order = await prisma.order.findUnique({
             where: { id: parseInt(orderId) },
-            include: {
-                items: true,
-            },
+            include: { items: true },
         });
 
+        // If the order is not found, return a 404 error
         if (!order) {
-            console.error('Nie znaleziono zamówienia');
+            console.error('Order not found');
             return new NextResponse('Zamówienie nie zostało znalezione.', { status: 404 });
         }
 
+        // generating document
         const pdfDoc = await PDFDocument.create();
-        pdfDoc.registerFontkit(fontkit);
-        const page = pdfDoc.addPage([600, 400]);
+        pdfDoc.registerFontkit(fontkit); // Register fontkit for custom font support
+        const page = pdfDoc.addPage([600, 400]); // Set page dimensions
 
-        // Load the Aleo-Regular font
+        // Static custom font path
         const fontPath = path.resolve('./public/fonts/Aleo-Regular.otf');
         const fontBytes = fs.readFileSync(fontPath);
         const font = await pdfDoc.embedFont(fontBytes);
@@ -43,19 +51,21 @@ export async function GET(req, context) {
         page.drawText('Faktura typu proforma, bez danych nabywającego:', { x: 50, y: 300, font, size: fontSize });
         page.drawText('Szczegóły zamówienia:', { x: 50, y: 240, font, size: fontSize });
 
-        let yPosition = 220;
-        let total = 0;
+        let yPosition = 220; // Vertical position for the first item
+        let total = 0; // Initialize total order amount
 
+        // Iterate through order items and add them to the PDF
         order.items.forEach(item => {
             page.drawText(`${item.name}`, { x: 50, y: yPosition, font, size: fontSize });
             page.drawText(`Ilość: ${item.quantity}`, { x: 250, y: yPosition, font, size: fontSize });
             page.drawText(`Cena: ${item.price.toFixed(2)} zł`, { x: 350, y: yPosition, font, size: fontSize });
             page.drawText(`Łącznie: ${(item.price * item.quantity).toFixed(2)} zł`, { x: 450, y: yPosition, font, size: fontSize });
 
-            total += item.price * item.quantity;
-            yPosition -= 20;
+            total += item.price * item.quantity; // calculatoing total amount
+            yPosition -= 20; // Move down for the next item
         });
 
+        // Add the total amount to the PDF
         page.drawText(`Suma do zapłaty: ${total.toFixed(2)} zł`, {
             x: 50,
             y: yPosition - 30,
@@ -64,9 +74,11 @@ export async function GET(req, context) {
             color: rgb(0, 0, 0),
         });
 
+        // Save the PDF document to a byte array
         const pdfBytes = await pdfDoc.save();
         console.log('Faktura została pomyślnie wygenerowana');
 
+        // Return the PDF as a downloadable file
         return new NextResponse(pdfBytes, {
             status: 200,
             headers: {
@@ -76,7 +88,8 @@ export async function GET(req, context) {
         });
 
     } catch (error) {
-        console.error('Błąd podczas generowania faktury:', error);
+        // Log and handle any errors that occur during PDF generation
+        console.error('Error generating invoice:', error);
         return new NextResponse('Błąd serwera podczas generowania faktury.', { status: 500 });
     }
 }
