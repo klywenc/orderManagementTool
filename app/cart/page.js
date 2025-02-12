@@ -32,9 +32,6 @@ const CartPage = () => {
                     {cartItems.length === 0 ? (
                         <div className="text-center py-10">
                             <p className="text-gray-600 text-lg">Twój koszyk jest pusty.</p>
-                            <Link href="/" className="text-orange-600 hover:underline mt-4 block">
-                                Wróć do sklepu
-                            </Link>
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
