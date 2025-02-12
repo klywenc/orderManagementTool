@@ -9,7 +9,7 @@ const ThankYouPage = () => {
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const res = await fetch('/api/orders'); // Poprawiona ścieżka
+                const res = await fetch('/api/orders');
                 if (!res.ok) throw new Error('Błąd ładowania zamówienia');
                 const data = await res.json();
                 setOrder(data);
@@ -44,10 +44,15 @@ const ThankYouPage = () => {
 
     return (
         <div className="container mx-auto p-6">
-            <h1 className="text-3xl font-bold mb-6 text-center text-green-600">Dziękujemy za zamówienie!</h1>
+            <h1 className="text-3xl font-bold mb-6 text-center">
+                Dziękujemy za
+                <span className="text-orange-600"> Zamówienie!</span>
+            </h1>
 
             <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-xl font-bold mb-4">Podsumowanie zamówienia</h2>
+                <h2 className="text-xl font-bold mb-4">
+                    <span className="text-orange-600">Podsumowanie</span> zamówienia
+                </h2>
                 <table className="w-full border-collapse border border-gray-300">
                     <thead>
                     <tr className="bg-gray-200">
@@ -72,20 +77,19 @@ const ThankYouPage = () => {
                 </table>
 
                 <p className="text-xl font-bold mt-6 text-right">
-                    Suma: <span className="text-green-600">{order.total.toFixed(2)} zł</span>
+                    Suma: <span className="text-orange-600">{order.total.toFixed(2)} zł</span>
                 </p>
             </div>
 
             <div className="text-center mt-6">
-                {/* Przycisk do pobrania faktury */}
                 <button
                     onClick={handleDownloadInvoice}
-                    className="bg-orange-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-orange-600 transition"
+                    className="bg-orange-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-orange-600 transition cursor-pointer"
                 >
                     Pobierz fakturę
                 </button>
                 <div className="mt-4">
-                    <a href="/" className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-600 transition">
+                    <a href="/" className="bg-gray-800 hover:bg-gray-900  text-white px-6 py-3 rounded-lg text-lg transition">
                         Powrót do strony głównej
                     </a>
                 </div>
