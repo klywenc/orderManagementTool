@@ -61,22 +61,9 @@ const MenuPage = () => {
   }
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="container mx-auto px-4">
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <h1 className="text-3xl font-semibold text-gray-800 mb-2">
-            Nasze Menu
-          </h1>
-          <p className="text-gray-500">Odkryj nasze pyszne propozycje</p>
-        </motion.div>
-    <div className="min-h-screen py-12"> 
-      <div className="container mx-auto px-6"> 
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-10"> 
+    <div className="min-h-screen py-12"> {/* Background color for the page */}
+      <div className="container mx-auto px-6"> {/* Container for centering content and padding */}
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-10"> {/* Card-like container for heading */}
           <motion.div
             className="text-center"
             initial={{ opacity: 0, y: -20 }}
@@ -91,7 +78,7 @@ const MenuPage = () => {
         </div>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
