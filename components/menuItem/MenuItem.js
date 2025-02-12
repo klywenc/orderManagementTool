@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { useCart } from '@/app/contexts/CartContext'; // Popraw ścieżkę, jeśli trzeba
+import { useCart } from '@/app/contexts/CartContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -21,39 +21,40 @@ const MenuItem = ({ item }) => {
 
     toast.success(`Dodano ${item.name} x ${quantity} do koszyka!`, {
       position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
+      autoClose: 2000, 
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      className: 'bg-white shadow-lg rounded-md border border-gray-200 text-gray-800', 
+      bodyClassName: 'py-2 px-3',
+      progressClassName: 'bg-orange-500',
     });
   };
 
   return (
-    <div className="p-5 rounded-xl shadow-md flex flex-col justify-between transition-transform duration-200 ease-in-out hover:scale-105 h-full"> {/* Kluczowe zmiany */}
-      <div>
-        <h2 className="text-xl font-bold text-orange-600 mb-1">{item.name}</h2>
-        <p className="text-gray-600 mb-2 text-sm">{item.description}</p>
-        <p className="text-lg font-semibold text-gray-800 mb-4">Cena: {item.price.toFixed(2)} zł</p>
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-md transition-shadow duration-200">
+      <div className="p-6">
+        <h2 className="text-xl font-semibold text-orange-600 mb-2">{item.name}</h2>
+        <p className="text-gray-600 text-sm mb-3">{item.description}</p>
+        <p className="text-lg font-semibold text-gray-800">Cena: {item.price.toFixed(2)} zł</p>
       </div>
 
-
-      <div className="flex items-center space-x-4">
+      <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
         <div className="flex items-center">
-          <label htmlFor={`quantity-${item.id}`} className="mr-2 text-sm">Ilość:</label>
+          <label htmlFor={`quantity-${item.id}`} className="mr-2 text-sm text-gray-700">Ilość:</label>
           <input
             type="number"
             id={`quantity-${item.id}`}
             min="1"
             value={quantity}
             onChange={handleQuantityChange}
-            className="w-16 border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            className="w-16 border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
         </div>
         <button
           onClick={handleAddToCart}
-          className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200"
+          className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
         >
           Dodaj do koszyka
         </button>
