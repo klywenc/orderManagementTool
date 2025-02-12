@@ -80,7 +80,6 @@ export async function GET(req, { params }) {
         });
 
     } catch (error) {
-        // Log and handle any errors that occur during PDF generation
         console.error('Error generating invoice:', error);
         return new NextResponse('Błąd serwera podczas generowania faktury.', { status: 500 });
     }
