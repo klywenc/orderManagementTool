@@ -29,7 +29,6 @@ export async function DELETE(request, { params }) {
   }
 
   try {
-    // Użyj await przed params
     const userId = Number((await params).id);
 
     await prisma.$transaction([

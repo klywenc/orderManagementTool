@@ -6,7 +6,7 @@ export async function GET(req) {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user || !session.user.id) {
-        console.log("Brak sesji użytkownika", session); // Logujemy brak sesji
+        console.log("Brak sesji użytkownika", session);
         return new Response(JSON.stringify({ error: "Nie jesteś zalogowany" }), { status: 401 });
     }
 

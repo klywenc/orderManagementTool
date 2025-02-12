@@ -1,16 +1,15 @@
-// app/api/menu/route.js
 import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server'; // Import NextResponse
+import { NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-export async function GET(request) { // Użyj nazwanego eksportu GET
+export async function GET(request) {
   try {
     const menuItems = await prisma.menuItem.findMany();
-    return NextResponse.json(menuItems); // Użyj NextResponse.json
+    return NextResponse.json(menuItems);
   } catch (error) {
     console.error("Błąd podczas pobierania menu:", error);
-    return NextResponse.json({ message: 'Błąd serwera' }, { status: 500 }); // Użyj NextResponse.json
+    return NextResponse.json({ message: 'Błąd serwera' }, { status: 500 });
   } finally {
     await prisma.$disconnect();
   }

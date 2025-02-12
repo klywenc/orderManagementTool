@@ -10,7 +10,6 @@ export async function GET(req, { params }) {
         return new Response(JSON.stringify({ error: "Nie jesteś zalogowany" }), { status: 401 });
     }
 
-    // Pobierz orderId z params
     const { orderId } = await params; // Await params here
 
     try {
@@ -38,10 +37,8 @@ export async function PATCH(req, { params }) {
         return new Response(JSON.stringify({ error: "Nie jesteś zalogowany" }), { status: 401 });
     }
 
-    // Pobierz orderId z params
-    const { orderId } = await params; // Await params here
+    const { orderId } = await params;
 
-    // Parsuj body żądania
     const { status } = await req.json();
 
     if (!status) {
@@ -75,7 +72,6 @@ export async function DELETE(req, { params }) {
         return new Response(JSON.stringify({ error: "Nie jesteś zalogowany" }), { status: 401 });
     }
 
-    // Pobierz orderId z params
     const { orderId } = await params; // Await params here
 
     try {
