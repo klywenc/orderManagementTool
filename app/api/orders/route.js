@@ -77,3 +77,37 @@ export async function POST(req) {
         return new Response(JSON.stringify({ error: "Błąd serwera" }), { status: 500 });
     }
 }
+
+// Aktualizacja statusu zamówienia
+export async function PATCH(req) {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user || !session.user.id) {
+        return new Response(JSON.stringify({ error: "Nie jesteś zalogowany" }), { status: 401 });
+    }
+
+    const { searchParams } = new URL(req.url);
+    const orderId = searchParams.get("id");
+
+    if (!orderId) {
+        return new Response(JSON.stringify({ error: "Brak ID zamówienia" }), { status: 400 });
+    }
+
+    const { status } = await req.json();
+
+    if (!status) {
+        return new Response(JSON.stringify({ error: "Brak nowego statusu" }), { status: 400 });
+    }
+
+    try {
+        const updatedOrder = await prisma.order.update({
+            where: { id: parseInt(orderId) },
+            data: { status }
+        });
+
+        return new Response(JSON.stringify(updatedOrder), { status: 200 });
+    } catch (error) {
+        console.error("Błąd aktualizacji zamówienia:", error);
+        return new Response(JSON.stringify({ error: "Błąd serwera" }), { status: 500 });
+    }
+}
