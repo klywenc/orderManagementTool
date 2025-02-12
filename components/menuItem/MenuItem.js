@@ -21,13 +21,12 @@ const MenuItem = ({ item }) => {
 
     toast.success(`Dodano ${item.name} x ${quantity} do koszyka!`, {
       position: "top-right",
-      autoClose: 2000, // Slightly shorter autoClose for toasts
-      hideProgressBar: true, // Hide progress bar for cleaner look
+      autoClose: 2000, 
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      className: 'bg-white shadow-lg rounded-md border border-gray-200 text-gray-800', // Custom toast style
+      className: 'bg-white shadow-lg rounded-md border border-gray-200 text-gray-800', 
       bodyClassName: 'py-2 px-3',
       progressClassName: 'bg-orange-500',
     });
