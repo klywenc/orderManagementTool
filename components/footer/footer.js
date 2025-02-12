@@ -7,14 +7,14 @@ const Footer = () => {
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 text-center items-center">
                 <div className="flex flex-col items-center">
                     <h2 className="px-2 py-4 text-2xl font-extrabold text-orange-700">Megumi Ramen</h2>
-                    <p className="text-sm mt-2">© 2025 Megumi Ramen. All rights reserved.</p>
+                    <p className="text-sm mt-2">© 2025 Megumi Ramen. Wszelkie prawa zastrzeżone.</p>
                 </div>
 
                 <div className="flex flex-col items-center">
-                    <h2 className="text-lg font-semibold">Quick Links</h2>
+                    <h2 className="text-lg font-semibold">Szybkie linki</h2>
                     <nav className="mt-2 flex flex-col space-y-2">
                         <Link href="/menu" className="hover:underline">Menu</Link>
-                        <Link href="/" className="hover:underline">Main Page</Link>
+                        <Link href="/" className="hover:underline">Strona główna</Link>
                     </nav>
                 </div>
 
