@@ -103,12 +103,16 @@ const EmployeePanelPage = () => {
   return (
       <div className="min-h-screen p-8 font-sans">
         <div className="container mx-auto">
-          <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Panel Pracownika</h1>
+          <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+            Panel <span className="text-orange-600">Pracownika</span>
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Nowe zamówienia (pending) */}
+            {/* Nowe zamówienia */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100">
               <div className="px-5 py-4 border-b border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-700">Nowe zamówienia</h2>
+                <h2 className="text-lg font-semibold text-gray-700">
+                  <span className="text-orange-600">Nowe</span> zamówienia
+                </h2>
               </div>
               <div className="p-5">
                 {pendingOrders.length > 0 ? (
@@ -118,9 +122,8 @@ const EmployeePanelPage = () => {
                             className="mb-4 p-4 rounded-md border border-gray-200 bg-gray-50"
                         >
                           <h3 className="text-md font-medium text-gray-800 mb-1">Zamówienie <span className="font-semibold text-gray-600">#{order.id}</span></h3>
-                          <p className="text-sm text-gray-500 mb-2">Kwota: <span className="text-gray-700">zł{order.total}</span></p> {/* Złotówki here */}
+                          <p className="text-sm text-gray-500 mb-2">Kwota: <span className="text-gray-700">{order.total} zł</span></p>
 
-                          {/* Order Items Display */}
                           <div className="mt-2">
                             <h4 className="text-sm font-semibold text-gray-700 mb-1">Zamówione produkty:</h4>
                             <ul className="list-disc list-inside text-sm text-gray-600">
@@ -133,13 +136,13 @@ const EmployeePanelPage = () => {
                           <div className="flex justify-start space-x-2 mt-4">
                             <button
                                 onClick={() => handleStatusChange(order.id, 'preparing')}
-                                className="px-3 py-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors duration-200 border border-blue-200"
+                                className="px-3 py-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors duration-200 border border-blue-200 cursor-pointer"
                             >
                               Przygotuj
                             </button>
                             <button
                                 onClick={() => handleStatusChange(order.id, 'cancelled')}
-                                className="px-3 py-2 text-sm font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors duration-200 border border-red-200"
+                                className="px-3 py-2 text-sm font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors duration-200 border border-red-200 cursor-pointer"
                             >
                               Anuluj
                             </button>
@@ -152,10 +155,12 @@ const EmployeePanelPage = () => {
               </div>
             </div>
 
-            {/* Zamówienia w przygotowaniu (preparing) */}
+            {/* Zamówienia w przygotowaniu */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-100">
               <div className="px-5 py-4 border-b border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-700">W przygotowaniu</h2>
+                <h2 className="text-lg font-semibold text-gray-700">
+                  W <span className="text-orange-600">przygotowaniu</span>
+                </h2>
               </div>
               <div className="p-5">
                 {preparingOrders.length > 0 ? (
@@ -165,9 +170,8 @@ const EmployeePanelPage = () => {
                             className="mb-4 p-4 rounded-md border border-gray-200 bg-gray-50"
                         >
                           <h3 className="text-md font-medium text-gray-800 mb-1">Zamówienie <span className="font-semibold text-gray-600">#{order.id}</span></h3>
-                          <p className="text-sm text-gray-500 mb-2">Kwota: <span className="text-gray-700">zł{order.total}</span></p> {/* Złotówki here */}
+                          <p className="text-sm text-gray-500 mb-2">Kwota: <span className="text-gray-700">{order.total} zł</span></p>
 
-                          {/* Order Items Display */}
                           <div className="mt-2">
                             <h4 className="text-sm font-semibold text-gray-700 mb-1">Zamówione produkty:</h4>
                             <ul className="list-disc list-inside text-sm text-gray-600">
@@ -180,13 +184,13 @@ const EmployeePanelPage = () => {
                           <div className="flex justify-start space-x-2 mt-4">
                             <button
                                 onClick={() => handleStatusChange(order.id, 'completed')}
-                                className="px-3 py-2 text-sm font-semibold text-green-600 bg-green-50 hover:bg-green-100 rounded-md transition-colors duration-200 border border-green-200"
+                                className="px-3 py-2 text-sm font-semibold text-green-600 bg-green-50 hover:bg-green-100 rounded-md transition-colors duration-200 border border-green-200 cursor-pointer"
                             >
                               Zakończ
                             </button>
                             <button
                                 onClick={() => handleStatusChange(order.id, 'cancelled')}
-                                className="px-3 py-2 text-sm font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors duration-200 border border-red-200"
+                                className="px-3 py-2 text-sm font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors duration-200 border border-red-200 cursor-pointer"
                             >
                               Anuluj
                             </button>
