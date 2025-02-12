@@ -120,7 +120,7 @@ const OrdersPage = () => {
                 <div className="bg-gray-50 rounded-xl shadow-md overflow-hidden">
                     <div className="px-6 py-5 border-b border-gray-200 bg-gray-50 shadow-md">
                         <h1 className="text-2xl font-semibold text-gray-800">
-                            Twoje <span className="text-black">Zamówienia</span>
+                            Twoje <span className="text-orange-600">Zamówienia</span>
                         </h1>
                     </div>
 
@@ -142,17 +142,16 @@ const OrdersPage = () => {
                                     <tr key={order.id} className="hover:bg-gray-50 transition-colors">
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium">{order.id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                            {/* Dynamic badge styles based on status */}
                                             <span
                                                 className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold ${statusColors[order.status]?.bgColor || 'bg-gray-100'} ${statusColors[order.status]?.textColor || 'text-gray-800'} border ${statusColors[order.status]?.borderColor || 'border-gray-200'}`}>
                                                 {statusToPolish[order.status] || order.status}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">zł {order.total.toFixed(2)}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{order.total.toFixed(2)} zł</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <button
                                                 onClick={() => handleDownloadInvoice(order.id)}
-                                                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                                className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer"
                                             >
                                                 Pobierz fakturę
                                             </button>

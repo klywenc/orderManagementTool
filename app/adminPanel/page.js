@@ -131,7 +131,7 @@ const AdminPanelPage = () => {
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
             <h1 className="text-2xl font-semibold text-gray-800">
-              <span className="text-orange-600">Admin</span> Panel
+              Panel <span className="text-orange-600">Administratora</span>
             </h1>
           </div>
 
