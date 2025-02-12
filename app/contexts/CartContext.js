@@ -1,11 +1,10 @@
 'use client';
+
 import { createContext, useState, useContext, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 
-// Create a context for the cart
 const CartContext = createContext();
 
-// Custom hook to access the cart context
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
@@ -27,7 +26,6 @@ export const CartProvider = ({ children }) => {
     }
   }, [cartItems]);
 
-  // Add an item to the cart or update its quantity if it already exists
   const addItemToCart = (item, quantity) => {
     const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
 
@@ -40,12 +38,10 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // Remove an item from the cart by its ID
   const removeItemFromCart = (itemId) => {
     setCartItems(cartItems.filter((item) => item.id !== itemId));
   };
 
-  // Update the quantity of a specific item in the cart
   const updateItemQuantity = (itemId, newQuantity) => {
     const itemIndex = cartItems.findIndex((item) => item.id === itemId);
     if (itemIndex > -1) {
@@ -55,13 +51,11 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // Clear the entire cart and remove it from localStorage
   const clearCart = () => {
     setCartItems([]);
     localStorage.removeItem('cart');
   };
 
-  // Finalize the order by sending cart items to the server
   const finalizeOrder = async () => {
     if (!session) {
       console.error('User not logged in. Cannot finalize order.');
