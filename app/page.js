@@ -1,8 +1,7 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import MainButtonPanel from "@/components/mainPageButtonPanel/buttonPanel";
 import ContentSection from "@/components/contentSection/contentSection";
 import MainReviews from "@/components/review/mainPageReviews";
+import MainSlider from "@/components/slider/mainPageSlider";
 
 export default function HomePage() {
   return (
@@ -14,33 +13,11 @@ export default function HomePage() {
                   </p>
               </ContentSection>
 
+              <MainSlider />
 
-
-
-
-              <MainButtonPanel/>
+              <MainButtonPanel />
 
               <MainReviews />
-
-              {/*<section className="text-center mb-10">*/}
-              {/*    <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">*/}
-              {/*        Co mówią nasi klienci?*/}
-              {/*    </h2>*/}
-              {/*    <div className="flex flex-col md:flex-row gap-6 justify-center">*/}
-              {/*        <blockquote className="bg-white shadow-lg rounded-lg p-6 max-w-sm mx-auto">*/}
-              {/*            <p className="text-gray-600 italic">*/}
-              {/*                „Najlepszy ramen, jaki jadłem w Polsce! Świetna obsługa i klimat.”*/}
-              {/*            </p>*/}
-              {/*            <span className="block font-bold text-gray-800 mt-4">— Michał K.</span>*/}
-              {/*        </blockquote>*/}
-              {/*        <blockquote className="bg-white shadow-lg rounded-lg p-6 max-w-sm mx-auto">*/}
-              {/*            <p className="text-gray-600 italic">*/}
-              {/*                „Mega aromatyczny bulion, autentyczny smak Japonii. Polecam każdemu!”*/}
-              {/*            </p>*/}
-              {/*            <span className="block font-bold text-gray-800 mt-4">— Karolina W.</span>*/}
-              {/*        </blockquote>*/}
-              {/*    </div>*/}
-              {/*</section>*/}
 
               <ContentSection title="Nasza historia">
                   <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
