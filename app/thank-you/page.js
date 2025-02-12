@@ -22,22 +22,18 @@ const ThankYouPage = () => {
 
         fetchOrder();
     }, []);
-
-    // Funkcja do obsługi pobierania faktury
     const handleDownloadInvoice = async () => {
         try {
-            const res = await fetch(`/api/orders/${order.id}/e-invoice`); // Ścieżka do generowania faktury
+            const res = await fetch(`/api/orders/${order.id}/e-invoice`);
             if (!res.ok) throw new Error('Błąd podczas generowania faktury');
-
-            // Pobieranie pliku PDF
-            const blob = await res.blob(); // Pobierz plik jako blob
-            const url = window.URL.createObjectURL(blob); // Utwórz URL dla pliku
-            const link = document.createElement('a'); // Utwórz link do pobrania
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
             link.href = url;
-            link.download = `faktura_${order.id}.pdf`; // Ustal nazwę pliku
+            link.download = `faktura_${order.id}.pdf`;
             document.body.appendChild(link);
-            link.click(); // Kliknij, aby pobrać
-            link.remove(); // Usuń link po kliknięciu
+            link.click();
+            link.remove();
         } catch (error) {
             console.error('Błąd podczas pobierania faktury:', error);
         }
