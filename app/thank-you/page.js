@@ -1,15 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const ThankYouPage = () => {
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
+    const searchParams = useSearchParams();
 
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const res = await fetch('/api/orders');
+                const res = await fetch('/api/orders?type=latest');
                 if (!res.ok) throw new Error('Błąd ładowania zamówienia');
                 const data = await res.json();
                 setOrder(data);
@@ -21,7 +23,8 @@ const ThankYouPage = () => {
         };
 
         fetchOrder();
-    }, []);
+    }, [searchParams]);
+
     const handleDownloadInvoice = async () => {
         try {
             const res = await fetch(`/api/orders/${order.id}/e-invoice`);
@@ -98,4 +101,10 @@ const ThankYouPage = () => {
     );
 };
 
-export default ThankYouPage;
+const ThankYouPageWrapper = () => (
+    <Suspense fallback={<p className="text-center text-lg">Ładowanie...</p>}>
+        <ThankYouPage />
+    </Suspense>
+);
+
+export default ThankYouPageWrapper;

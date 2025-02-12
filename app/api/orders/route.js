@@ -14,14 +14,14 @@ export async function GET(req) {
 
     try {
         if (type === "all") {
-            // Pobierz wszystkie zamówienia użytkownika
+            // Pobierz wszystkie zamówienia zalogowanego użytkownika
             const orders = await prisma.order.findMany({
                 where: { userId: session.user.id },
                 include: { items: true }
             });
             return new Response(JSON.stringify(orders), { status: 200 });
-        } else {
-            // Pobierz najnowsze zamówienie
+        } else if (type === "latest") {
+            // Pobierz najnowsze zamówienie zalogowanego użytkownika
             const latestOrder = await prisma.order.findFirst({
                 where: { userId: session.user.id },
                 orderBy: { createdAt: "desc" },
@@ -33,6 +33,23 @@ export async function GET(req) {
             }
 
             return new Response(JSON.stringify(latestOrder), { status: 200 });
+        } else if (type === "fall") {
+            const user = await prisma.user.findUnique({
+                where: { id: session.user.id },
+                select: { role: true }
+            });
+
+            if (user.role !== 'admin' && user.role !== 'employee') {
+                return new Response(JSON.stringify({ error: "Nie masz uprawnień do przeglądania wszystkich zamówień" }), { status: 403 });
+            }
+
+            const allOrders = await prisma.order.findMany({
+                include: { items: true }
+            });
+
+            return new Response(JSON.stringify(allOrders), { status: 200 });
+        } else {
+            return new Response(JSON.stringify({ error: "Nieprawidłowy typ zapytania" }), { status: 400 });
         }
     } catch (error) {
         console.error("Błąd pobierania zamówienia:", error);
@@ -40,7 +57,6 @@ export async function GET(req) {
     }
 }
 
-// Tworzenie zamówienia
 export async function POST(req) {
     const session = await getServerSession(authOptions);
 

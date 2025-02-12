@@ -21,7 +21,7 @@ export async function GET(req) {
 
         if (!latestOrder) {
             console.log("Brak zamówienia dla użytkownika", session.user.id);
-            return new Response(JSON.stringify({ error: "Brak zamówień" }), { status: 404 });
+            return new Response(JSON.stringify({ error: "Brak zamówień" }), {});
         }
 
         return new Response(JSON.stringify(latestOrder), { status: 200 });
