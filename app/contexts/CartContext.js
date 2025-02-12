@@ -1,12 +1,16 @@
 'use client';
 import { createContext, useState, useContext, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 
+// Create a context for the cart
 const CartContext = createContext();
 
+// Custom hook to access the cart context
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -23,6 +27,7 @@ export const CartProvider = ({ children }) => {
     }
   }, [cartItems]);
 
+  // Add an item to the cart or update its quantity if it already exists
   const addItemToCart = (item, quantity) => {
     const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
 
@@ -35,10 +40,12 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  // Remove an item from the cart by its ID
   const removeItemFromCart = (itemId) => {
     setCartItems(cartItems.filter((item) => item.id !== itemId));
   };
 
+  // Update the quantity of a specific item in the cart
   const updateItemQuantity = (itemId, newQuantity) => {
     const itemIndex = cartItems.findIndex((item) => item.id === itemId);
     if (itemIndex > -1) {
@@ -48,17 +55,27 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  // Clear the entire cart and remove it from localStorage
   const clearCart = () => {
     setCartItems([]);
     localStorage.removeItem('cart');
   };
 
+  // Finalize the order by sending cart items to the server
   const finalizeOrder = async () => {
+    if (!session) {
+      console.error('User not logged in. Cannot finalize order.');
+      return;
+    }
+
     try {
       const response = await fetch('/api/orders', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cartItems }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.jwt}`, // Include JWT for authentication
+        },
+        body: JSON.stringify({ items: cartItems, userId: session.user.id }),
       });
 
       const responseData = await response.json();
@@ -66,12 +83,14 @@ export const CartProvider = ({ children }) => {
       if (response.ok) {
         clearCart();
       } else {
-        console.error('Błąd zapisu zamówienia:', responseData.error || response.statusText);
+        console.error('Order submission error:', responseData.error || response.statusText);
       }
     } catch (error) {
-      console.error('Błąd serwera:', error);
+      console.error('Server error:', error);
     }
   };
+
+  const totalItemsInCart = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const value = {
     cartItems,
@@ -80,12 +99,8 @@ export const CartProvider = ({ children }) => {
     updateItemQuantity,
     clearCart,
     finalizeOrder,
+    totalItemsInCart,
   };
-  const totalItemsInCart = cartItems.reduce((total, item) => total + item.quantity, 0);
 
-  return (
-      <CartContext.Provider value={{ cartItems, addItemToCart, removeItemFromCart, clearCart, totalItemsInCart }}>
-        {children}
-      </CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
