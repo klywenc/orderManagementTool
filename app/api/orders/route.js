@@ -2,11 +2,17 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from '@/lib/prisma';
 
-// Obsługa różnych zapytań GET
+/**
+ * Managing GET in creating new order..
+ *
+ * @param {Request} req - HTTP request object.
+ * @returns {Response} - HTTP response.
+ */
 export async function GET(req) {
     const session = await getServerSession(authOptions);
 
-    if (!session || !session.user || !session.user.id) {
+    // Login Checker
+    if (!session?.user?.id) {
         return new Response(JSON.stringify({ error: "Nie jesteś zalogowany" }), { status: 401 });
     }
 
@@ -15,14 +21,12 @@ export async function GET(req) {
 
     try {
         if (type === "all") {
-            // Pobierz wszystkie zamówienia użytkownika
             const orders = await prisma.order.findMany({
                 where: { userId: session.user.id },
                 include: { items: true }
             });
             return new Response(JSON.stringify(orders), { status: 200 });
         } else {
-            // Pobierz najnowsze zamówienie
             const latestOrder = await prisma.order.findFirst({
                 where: { userId: session.user.id },
                 orderBy: { createdAt: "desc" },
@@ -41,17 +45,24 @@ export async function GET(req) {
     }
 }
 
-// Tworzenie zamówienia
+/**
+ * Managing post in creating new order.
+ *
+ * @param {Request} req - HTTP request object.
+ * @returns {Response} - HTTP response.
+ */
 export async function POST(req) {
     const session = await getServerSession(authOptions);
 
-    if (!session || !session.user || !session.user.id) {
+    // Login Checker
+    if (!session?.user?.id) {
         return new Response(JSON.stringify({ error: "Nie jesteś zalogowany" }), { status: 401 });
     }
 
     const { items } = await req.json();
 
-    if (!items || items.length === 0) {
+    // Validation
+    if (!items?.length) {
         return new Response(JSON.stringify({ error: "Brak produktów w zamówieniu" }), { status: 400 });
     }
 
