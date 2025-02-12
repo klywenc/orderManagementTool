@@ -1,13 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Loading from '@/components/loading/Loading';
+
+function SearchParamsWrapper({ children }) {
+    const searchParams = useSearchParams();
+    return children(searchParams);
+}
 
 export default function ClientLayout({ children }) {
     const [isLoading, setIsLoading] = useState(false);
     const pathname = usePathname();
-    const searchParams = useSearchParams();
 
     useEffect(() => {
         setIsLoading(true);
@@ -17,12 +21,18 @@ export default function ClientLayout({ children }) {
         }, 500);
 
         return () => clearTimeout(timeout);
-    }, [pathname, searchParams]);
+    }, [pathname]);
 
     return (
         <>
             {isLoading && <Loading />}
-            {children}
+            <Suspense fallback={<Loading />}>
+                <SearchParamsWrapper>
+                    {(searchParams) => {
+                        return children;
+                    }}
+                </SearchParamsWrapper>
+            </Suspense>
         </>
     );
 }

@@ -3,6 +3,7 @@
 import { useCart } from '@/app/contexts/CartContext';
 import { useRouter } from 'next/navigation';
 import CartTable from "@/components/cart/cartTable";
+import { Suspense } from 'react';
 
 const CartPage = () => {
     const { cartItems, removeItemFromCart, updateItemQuantity, clearCart } = useCart();
@@ -30,11 +31,13 @@ const CartPage = () => {
                     </h1>
                 </div>
 
-                <CartTable
-                    cartItems={cartItems}
-                    handleQuantityChange={handleQuantityChange}
-                    removeItemFromCart={removeItemFromCart}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <CartTable
+                        cartItems={cartItems}
+                        handleQuantityChange={handleQuantityChange}
+                        removeItemFromCart={removeItemFromCart}
+                    />
+                </Suspense>
 
                 {cartItems.length > 0 && (
                     <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
