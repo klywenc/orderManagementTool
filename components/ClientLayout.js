@@ -1,6 +1,5 @@
-// components/ClientLayout.js
-'use client'; // Ten komponent jest kliencki
 
+'use client';
 import { useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Loading from '@/components/loading/Loading';
@@ -11,14 +10,14 @@ export default function ClientLayout({ children }) {
     const searchParams = useSearchParams();
 
     useEffect(() => {
-        setIsLoading(true); // Rozpocznij ładowanie przy zmianie trasy
+        setIsLoading(true);
 
         const timeout = setTimeout(() => {
-            setIsLoading(false); // Zakończ ładowanie po krótkim opóźnieniu (symulacja)
-        }, 500); // Możesz dostosować opóźnienie
+            setIsLoading(false);
+        }, 500);
 
-        return () => clearTimeout(timeout); // Wyczyść timeout przy odmontowaniu
-    }, [pathname, searchParams]); // Reaguj na zmiany w pathname i searchParams
+        return () => clearTimeout(timeout);
+    }, [pathname, searchParams]);
 
     return (
         <>
