@@ -8,31 +8,55 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.8); /* Lekko przezroczyste tło */
+    background-color: rgba(255, 255, 255, 0); /* Startowa przezroczystość */
+    animation: fadeInBackground 0.3s ease-in-out forwards; /* Szybsza animacja tła */
     z-index: 1000; /* Upewnij się, że animacja jest na wierzchu */
 }
 
 .ramenImage {
     width: 100px; /* Dostosuj rozmiar obrazka */
     height: auto;
-    animation: scaleAnimation 2s ease-in-out infinite; /* Animacja */
+    animation: scaleAnimation 1.2s ease-in-out infinite, fadeInImage 0.3s ease-in-out; /* Szybsze animacje */
     transform-origin: center; /* Punkt odniesienia dla animacji (środek obrazka) */
 }
 
+/* Szybsza animacja powiększania */
 @keyframes scaleAnimation {
     0% {
-        transform: scale(1); /* Początkowa skala (normalny rozmiar) */
+        transform: scale(1);
     }
     25% {
-        transform: scale(1.1); /* Powiększenie o 10% */
+        transform: scale(1.1);
     }
     50% {
-        transform: scale(1.2); /* Powiększenie o 20% */
+        transform: scale(1.2);
     }
     75% {
-        transform: scale(1.1); /* Zmniejszenie o 10% */
+        transform: scale(1.1);
     }
     100% {
-        transform: scale(1); /* Powrót do normalnego rozmiaru */
+        transform: scale(1);
+    }
+}
+
+/* Szybsza animacja tła */
+@keyframes fadeInBackground {
+    0% {
+        background-color: rgba(255, 255, 255, 0);
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+/* Szybsza animacja pojawienia się obrazka */
+@keyframes fadeInImage {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 }
