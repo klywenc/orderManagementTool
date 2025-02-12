@@ -61,7 +61,7 @@ const MenuPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-12"
