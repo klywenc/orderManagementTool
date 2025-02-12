@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link';
+import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
+import { FaShoppingBasket } from "react-icons/fa";
 import { useSession, signOut } from 'next-auth/react';
 import { useCart } from '@/app/contexts/CartContext';
 
@@ -63,14 +65,20 @@ const Navigation = () => {
             <li className='relative flex items-center'>
               <Link
                   href="/cart"
-                  className='block py-2 px-3 text-gray-600 rounded-sm md:hover:bg-transparent md:border-0 md:hover:text-orange-600 md:p-0 dark:text-gray-600 dark:hover:text-orange-600 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full'
+                  className="flex items-center space-x-1 py-2 px-3 text-gray-600 rounded-sm
+                   md:hover:bg-transparent md:border-0 md:hover:text-orange-600 md:p-0
+                   dark:text-gray-600 dark:hover:text-orange-600 relative
+                   after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
+                   after:bg-orange-600 after:transition-all after:duration-300
+                   hover:after:w-full"
               >
-                Koszyk
+                <FaShoppingBasket className="text-xl" />
+                <span>Koszyk</span>
               </Link>
               {totalItemsInCart > 0 && (
-                  <span className='absolute -top-2 -right-5 bg-orange-600 text-white text-xs font-bold px-2 py-1 rounded-full'>
-                    {totalItemsInCart}
-                  </span>
+                  <span className="absolute -top-2 -right-5 bg-orange-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+            {totalItemsInCart}
+        </span>
               )}
             </li>
 
@@ -79,9 +87,15 @@ const Navigation = () => {
                   <li>
                     <Link
                         href="/login"
-                        className='block py-2 px-3 text-gray-600 rounded-sm md:hover:bg-transparent md:border-0 md:hover:text-orange-600 md:p-0 dark:text-gray-600 dark:hover:text-orange-600 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full'
+                        className="flex items-center space-x-1 py-2 px-3 text-gray-600 rounded-sm
+                           md:hover:bg-transparent md:border-0 md:hover:text-orange-600 md:p-0
+                           dark:text-gray-600 dark:hover:text-orange-600 relative
+                           after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
+                           after:bg-orange-600 after:transition-all after:duration-300
+                           hover:after:w-full"
                     >
-                      Zaloguj
+                      <IoIosLogIn className="text-xl" />
+                      <span>Zaloguj</span>
                     </Link>
                   </li>
                   <li>
@@ -96,10 +110,16 @@ const Navigation = () => {
             ) : (
                 <li>
                   <button
-                      onClick={() => signOut({ callbackUrl: '/' })}
-                      className='block py-2 px-3 text-gray-600 rounded-sm md:hover:bg-transparent md:border-0 md:hover:text-orange-600 md:p-0 dark:text-gray-600 dark:hover:text-orange-600 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-orange-600 after:transition-all after:duration-300 hover:after:w-full'
+                      onClick={() => signOut({callbackUrl: '/'})}
+                      className="flex items-center space-x-1 py-2 px-3 text-gray-600 rounded-sm
+                         md:hover:bg-transparent md:border-0 md:hover:text-orange-600 md:p-0
+                         dark:text-gray-600 dark:hover:text-orange-600 relative
+                         after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
+                         after:bg-orange-600 after:transition-all after:duration-300
+                         hover:after:w-full"
                   >
-                    Wyloguj
+                    <IoIosLogOut className="text-xl" />
+                    <span>Wyloguj</span>
                   </button>
                 </li>
             )}
