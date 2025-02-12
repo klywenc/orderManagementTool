@@ -73,7 +73,9 @@ export default function HomePage() {
                   </p>
               </ContentSection>
 
-              <MainButtonPanel/>
+              <ContentSection>
+                  <MainButtonPanel/>
+              </ContentSection>
           </div>
       </main>
   );
