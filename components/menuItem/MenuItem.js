@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
-import { useCart } from '@/app/contexts/CartContext';
-import { ToastContainer, toast } from 'react-toastify'; 
+import { useCart } from '@/app/contexts/CartContext'; // Popraw ścieżkę, jeśli trzeba
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MenuItem = ({ item }) => {
@@ -31,14 +31,17 @@ const MenuItem = ({ item }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md transition-transform duration-200 ease-in-out hover:scale-105"> {/* Dodano klasy Tailwind */}
-      <h2 className="text-2xl font-bold text-orange-600 mb-2">{item.name}</h2>
-      <p className="text-gray-600 mb-4">{item.description}</p>
-      <p className="text-lg font-semibold text-gray-800 mb-4">Cena: {item.price.toFixed(2)} zł</p>
+    <div className="p-5 rounded-xl shadow-md flex flex-col justify-between transition-transform duration-200 ease-in-out hover:scale-105 h-full"> {/* Kluczowe zmiany */}
+      <div>
+        <h2 className="text-xl font-bold text-orange-600 mb-1">{item.name}</h2>
+        <p className="text-gray-600 mb-2 text-sm">{item.description}</p>
+        <p className="text-lg font-semibold text-gray-800 mb-4">Cena: {item.price.toFixed(2)} zł</p>
+      </div>
+
 
       <div className="flex items-center space-x-4">
         <div className="flex items-center">
-          <label htmlFor={`quantity-${item.id}`} className="mr-2">Ilość:</label>
+          <label htmlFor={`quantity-${item.id}`} className="mr-2 text-sm">Ilość:</label>
           <input
             type="number"
             id={`quantity-${item.id}`}

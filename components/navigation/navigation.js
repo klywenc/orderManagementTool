@@ -7,7 +7,7 @@ const Navigation = () => {
   const { data: session } = useSession();
 
   return (
-    <nav className='bg-white border-gray-200 dark:bg-gray-200 px-2 sm:px-4 shadow-lg'>
+    <nav className='bg-white md:dark:bg-gray-50 px-2 sm:px-48 shadow-lg'>
       <div className='max-w-screen-3xl flex flex-wrap items-center justify-between mx-auto p-1'>
         <Link
           href="/"
@@ -15,7 +15,7 @@ const Navigation = () => {
         >
           Megumi Ramen
         </Link>
-        <ul className='text-base flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-200 md:dark:bg-gray-200 dark:border-gray-200'>
+        <ul className='text-base flex flex-col p-4 md:p-0 mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white md:dark:bg-gray-50'>
           <li>
             <Link
               href="/menu"
