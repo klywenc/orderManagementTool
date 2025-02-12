@@ -19,7 +19,7 @@ const Footer = () => {
                 </div>
 
                 <div className="flex flex-col items-center">
-                    <h2 className="text-lg font-semibold">Follow Us</h2>
+                    <h2 className="text-lg font-semibold">Obserwuj Nas</h2>
                     <div className="flex flex-col space-y-3 mt-2">
                         <Link href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
                             <div
