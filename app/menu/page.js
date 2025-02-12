@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import MenuItem from '@/components/menuItem/MenuItem';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -30,9 +30,9 @@ const MenuPage = () => {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { 
+      transition: {
         staggerChildren: 0.1,
         when: "beforeChildren"
       }
@@ -61,29 +61,31 @@ const MenuPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4">
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <h1 className="text-3xl font-semibold text-gray-800 mb-2">
-            Nasze Menu
-          </h1>
-          <p className="text-gray-500">Odkryj nasze pyszne propozycje</p>
-        </motion.div>
+    <div className="min-h-screen py-12"> 
+      <div className="container mx-auto px-6"> 
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-10"> 
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <h1 className="text-3xl font-semibold text-gray-800 mb-3"> {/* Heading style */}
+              Nasze <span className="text-orange-600">Menu</span> {/* Orange accent for "Menu" */}
+            </h1>
+            <p className="text-gray-600 text-lg">Odkryj nasze pyszne propozycje</p> {/* Subtitle style */}
+          </motion.div>
+        </div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {menuItems.map((item) => (
-            <motion.div 
-              key={item.id} 
+            <motion.div
+              key={item.id}
               variants={itemVariants}
             >
               <MenuItem item={item} />
