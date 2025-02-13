@@ -24,7 +24,7 @@ export async function GET(req, { params }) {
         // Return a 404 error if the order is not found
         if (!order) {
             console.error('Order not found');
-            return new NextResponse('Zamówienie nie zostało znalezione.', { status: 404 });
+            return new NextResponse('Zamówienie nie zostało znalezione.', {  });
         }
 
         // creating a new pdf document
